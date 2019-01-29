@@ -28,6 +28,8 @@ img = if option[:sub]
           end
         end
         img
+      else
+        img
       end
 
 img = if option[:flip]
@@ -63,9 +65,9 @@ if option[:split]
   for y in 0...img.rows
     for x in 0...img.columns
       pix = img.pixel_color(x, y)
-      img_rgb[0].pixel_color(x, y, Magick::Pixel.new(pix.red, pix.red, pix.red))
-      img_rgb[1].pixel_color(x, y, Magick::Pixel.new(pix.green, pix.green, pix.green))
-      img_rgb[2].pixel_color(x, y, Magick::Pixel.new(pix.blue, pix.blue, pix.blue))
+      img_rgb[0].pixel_color(x, y, Magick::Pixel.new(pix.red.to_f, 0, 0))
+      img_rgb[1].pixel_color(x, y, Magick::Pixel.new(0, pix.green.to_f, 0))
+      img_rgb[2].pixel_color(x, y, Magick::Pixel.new(0, 0, pix.blue.to_f))
     end
   end
   img_rgb[0].write(dst_path.gsub(/(.+)\.(.*)/, '\1_red.\2'))
