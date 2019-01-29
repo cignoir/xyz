@@ -45,11 +45,15 @@ img = if option[:flip]
         else
           img
         end
+      else
+        img
       end
 
 img = if option[:resize]
         resize_ratio = [[option[:resize].to_f, 0].max, 1].min.to_f
         img.resize_to_fit(img.columns * resize_ratio, img.rows * resize_ratio)
+      else
+        img
       end
 
 if option[:split]
